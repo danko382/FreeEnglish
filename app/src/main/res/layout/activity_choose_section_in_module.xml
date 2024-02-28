@@ -44,4 +44,13 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewRoole" />
+
+    <ImageView
+        android:id="@+id/imageViewBackFromChoose"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#C0C8D3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 </androidx.constraintlayout.widget.ConstraintLayout>

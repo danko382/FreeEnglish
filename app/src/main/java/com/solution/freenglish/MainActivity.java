@@ -2,6 +2,7 @@ package com.solution.freenglish;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -28,7 +29,40 @@ public class MainActivity extends AppCompatActivity {
         textViewModule1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChooseSectionInModuleActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        textViewModule2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChooseSectionInModuleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewModule3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChooseSectionInModuleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewModule4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChooseSectionInModuleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewModule5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChooseSectionInModuleActivity.class);
+                startActivity(intent);
             }
         });
     }

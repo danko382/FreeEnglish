@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">FreeEnglish</string>
+    <string name="textViewWord"></string>
+    <string name="buttonChooseTranslateWord1"></string>
+    <string name="buttonChooseTranslateWord2"></string>
+
+    <array name="wordsModule1">
+        <item>Communication</item>
+        <item>Dialogue</item>
+        <item>Connection</item>
+        <item>Active listening</item>
+        <item>Understanding</item>
+        <item>Respect</item>
+        <item>Politeness</item>
+        <item>Open-mindedness</item>
+        <item>Joy</item>
+        <item>Surprise</item>
+    </array>
+    <array name="translateWordsModule1">
+        <item>общение</item>
+        <item>диалог</item>
+        <item>связь</item>
+        <item>активное слушание</item>
+        <item>понимание</item>
+        <item>уважение</item>
+        <item>вежливость</item>
+        <item>широта взглядов</item>
+        <item>радость</item>
+        <item>удивление</item>
+    </array>
+
 </resources>
