@@ -17,6 +17,10 @@ public class ModuleActivity extends AppCompatActivity {
     Button buttonChooseTranslateWord2;
     Button buttonNextWord;
     ImageView imageViewBackFromModule;
+    int size;
+    int count = 0;
+    String[] words;
+    String[] translateWords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,12 @@ public class ModuleActivity extends AppCompatActivity {
         buttonNextWord = findViewById(R.id.buttonNextWord);
         imageViewBackFromModule = findViewById(R.id.imageViewBackFromModule);
 
+        chooseWordsModule();
+        textViewWord.setText(words[0]);
+        buttonChooseTranslateWord1.setText(translateWords[0]);
+        buttonChooseTranslateWord2.setText(translateWords[(int) Math.random() * 9]);
+        count++;
+
         imageViewBackFromModule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,21 +47,28 @@ public class ModuleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    private void chooseWordsModule() {
-        String[] words = getResources().getStringArray(R.array.wordsModule1);
-        String[] translateWords = getResources().getStringArray(R.array.translateWordsModule1);
-        int size = words.length;
-        int count = 0;
-        
 
         buttonNextWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (count < size) {
+                    textViewWord.setText(words[count]);
+                    buttonChooseTranslateWord1.setText(translateWords[count]);
+                    buttonChooseTranslateWord2.setText(translateWords[(int) Math.random() * 9]);
+                    count++;
+                } else {
+                    Intent intent = new Intent(ModuleActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
+    }
+
+    private void chooseWordsModule() {
+        words = getResources().getStringArray(R.array.wordsModule1);
+        translateWords = getResources().getStringArray(R.array.translateWordsModule1);
+        size = words.length;
+        count = 0;
     }
 
 
