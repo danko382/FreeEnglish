@@ -29,4 +29,27 @@
         <item>удивление</item>
     </array>
 
+    <array name="greenWords">
+        <item>I</item>
+        <item>He</item>
+        <item>She</item>
+    </array>
+
+    <array name="purpleWords">
+        <item>drive</item>
+        <item>likes</item>
+        <item>doesnt like</item>
+    </array>
+
+    <array name="blueWords">
+        <item>to work</item>
+        <item>to drink</item>
+        <item>swimming</item>
+    </array>
+
+    <array name="whiteWords">
+        <item>every day</item>
+        <item>milk</item>
+        <item>pool</item>
+    </array>
 </resources>
