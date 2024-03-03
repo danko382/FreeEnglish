@@ -23,7 +23,7 @@
         android:id="@+id/textViewRoole"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:text="Roole"
+        android:text="Rule"
         android:textSize="32sp"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/textViewPractice"
