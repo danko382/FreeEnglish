@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class ModuleActivity extends AppCompatActivity {
+public class ModuleActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView textViewWord;
     ImageView imageViewTranslateWord, imageViewBackFromModule;
@@ -102,10 +102,6 @@ public class ModuleActivity extends AppCompatActivity {
         });
     }
 
-    private void chooseWordsModule() {
-
-    }
-
     private void initWords() {
         words = getResources().getStringArray(R.array.wordsModule1);
         translateWords = getResources().getStringArray(R.array.translateWordsModule1);
@@ -125,4 +121,8 @@ public class ModuleActivity extends AppCompatActivity {
         buttonChooseTranslateWord2.setBackgroundColor(Color.BLUE);
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }
