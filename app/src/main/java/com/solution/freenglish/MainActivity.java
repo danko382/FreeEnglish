@@ -39,14 +39,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == textViewModule1) {
+            ChooseSelectionModuleActivity.putExtra("numOfModule", "1");
             startActivity(ChooseSelectionModuleActivity);
         } else if (v == textViewModule2) {
+            ChooseSelectionModuleActivity.putExtra("numOfModule", "2");
             startActivity(ChooseSelectionModuleActivity);
         } else if (v == textViewModule3) {
+            ChooseSelectionModuleActivity.putExtra("numOfModule", "3");
             startActivity(ChooseSelectionModuleActivity);
         } else if (v == textViewModule4) {
+            ChooseSelectionModuleActivity.putExtra("numOfModule", "4");
             startActivity(ChooseSelectionModuleActivity);
         } else if (v == textViewModule5) {
+            ChooseSelectionModuleActivity.putExtra("numOfModule", "5");
             startActivity(ChooseSelectionModuleActivity);
         }
     }

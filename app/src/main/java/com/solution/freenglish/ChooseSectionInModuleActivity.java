@@ -12,19 +12,23 @@ public class ChooseSectionInModuleActivity extends AppCompatActivity implements 
 
     TextView textViewWors, textViewRule, textViewPractice;
     ImageView imageViewBackFromChoose;
-    Intent moduleActivity, mainActivity;
+    Intent moduleActivity, mainActivity, superActivity;
+    String numOfModule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_section_in_module);
 
+        moduleActivity = new Intent(ChooseSectionInModuleActivity.this, ModuleActivity.class);
+        mainActivity = new Intent(ChooseSectionInModuleActivity.this, MainActivity.class);
+        superActivity = getIntent();
+
         init();
     }
 
     private void init() {
-        moduleActivity = new Intent(ChooseSectionInModuleActivity.this, ModuleActivity.class);
-        mainActivity = new Intent(ChooseSectionInModuleActivity.this, MainActivity.class);
+        numOfModule = superActivity.getStringExtra("numOfModule");
 
         textViewWors = findViewById(R.id.textViewWords);
         textViewRule = findViewById(R.id.textViewRoole);
@@ -40,10 +44,16 @@ public class ChooseSectionInModuleActivity extends AppCompatActivity implements 
     @Override
     public void onClick(View v) {
         if (v == textViewWors) {
+            moduleActivity.putExtra("numOfModule", numOfModule);
+            moduleActivity.putExtra("typeOfModule", "words");
             startActivity(moduleActivity);
         } else if (v == textViewRule) {
+            moduleActivity.putExtra("numOfModule", numOfModule);
+            moduleActivity.putExtra("typeOfModule", "rule");
             startActivity(moduleActivity);
         } else if (v == textViewPractice) {
+            moduleActivity.putExtra("numOfModule", numOfModule);
+            moduleActivity.putExtra("typeOfModule", "practice");
             startActivity(moduleActivity);
         } else if (v == imageViewBackFromChoose) {
             startActivity(mainActivity);
