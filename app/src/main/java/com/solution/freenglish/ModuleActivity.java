@@ -1,12 +1,10 @@
 package com.solution.freenglish;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,8 +15,8 @@ import java.util.Random;
 
 public class ModuleActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextView textViewWord;
-    ImageView imageViewTranslateWord, imageViewBackFromModule;
+    TextView imageViewTranslateWord, textViewWord;
+    ImageView imageViewBackFromModule;
     Button buttonChooseTranslateWord1, buttonChooseTranslateWord2, buttonNextWord;
     int size, count, numOfTrueButton, numOfFalseTranslate;
     String[] words, translateWords;
@@ -65,7 +63,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         typeOfModule = superIntent.getStringExtra("typeOfModule");
 
         textViewWord = findViewById(R.id.textViewWord);
-        imageViewTranslateWord = findViewById(R.id.imageViewTranslateWord);
+        imageViewTranslateWord = findViewById(R.id.textViewTranslateWord);
         buttonChooseTranslateWord1 = findViewById(R.id.buttonChooseTranslateWord1);
         buttonChooseTranslateWord2 = findViewById(R.id.buttonChooseTranslateWord2);
         buttonNextWord = findViewById(R.id.buttonNextWord);

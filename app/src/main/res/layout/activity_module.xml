@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -125,7 +126,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="#C0C8D3"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
@@ -135,8 +136,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewTranslateWord"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTranslateWord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -147,43 +148,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/buttonChooseTranslateWord2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTranslateWord" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTranslateWord" />
 
     <Button
         android:id="@+id/buttonChooseTranslateWord2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonChooseTranslateWord1" />
 
-    <ImageView
-        android:id="@+id/imageViewTranslateWord"
+    <TextView
+        android:id="@+id/textViewTranslateWord"
         android:layout_width="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/buttonChooseTranslateWord1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWord"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewWord"/>
 
     <Button
         android:id="@+id/buttonNextWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
