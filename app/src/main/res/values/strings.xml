@@ -3,6 +3,7 @@
     <string name="textViewWord"></string>
     <string name="buttonChooseTranslateWord1"></string>
     <string name="buttonChooseTranslateWord2"></string>
+    <string name="main_logo">FreeEnglish</string>
 
     <array name="wordsModule1">
         <item>Communication</item>
