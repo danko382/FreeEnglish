@@ -1,5 +1,6 @@
 package com.solution.freenglish;
 
+import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,6 +20,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         init();
     }
+
+    static Intent newIntent(Context context){
+        return new Intent(context, MainActivity.class);
+    }
+
 
     private void init() {
         ChooseSelectionModuleActivity = new Intent(MainActivity.this, ChooseSectionInModuleActivity.class);

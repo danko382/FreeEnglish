@@ -4,6 +4,11 @@
     <string name="buttonChooseTranslateWord1"></string>
     <string name="buttonChooseTranslateWord2"></string>
     <string name="main_logo">FreeEnglish</string>
+    <string name="your_email">Your Email:</string>
+    <string name="your_password">Your Password:</string>
+    <string name="login">LOGIN</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="register">Register</string>
 
     <array name="wordsModule1">
         <item>Communication</item>
