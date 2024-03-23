@@ -1,30 +1,29 @@
 package com.solution.freenglish;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.content.Intent;
+import android.os.Bundle;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< Updated upstream
 
-public class Verification extends AppCompatActivity {}
-=======
-import android.os.Bundle;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Verification extends AppCompatActivity {
+import java.util.logging.ErrorManager;
 
+public class LoginActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
-
+    private TextView textViewRegistration;
     private TextView textViewForgotPassword;
-    private TextView textViewRegister;
 
     private LoginViewModel viewModel;
 
@@ -33,13 +32,13 @@ public class Verification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        initViews();
+        initView();
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        observeViewModel();
-        setupClickListeners();
+        observViewModel() ;
+       setupClickListener();
     }
 
-    private void setupClickListeners(){
+    private void setupClickListener() {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,34 +47,47 @@ public class Verification extends AppCompatActivity {
                 viewModel.login(email, password);
             }
         });
-    }
+        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ResetPasswordActivity.newIntent(LoginActivity.this, editTextEmail.getText().toString().trim());
+                startActivity(intent);
+            }
+        });
+        textViewRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = RegistrationActivity.newIntent(LoginActivity.this);
+                startActivity(intent);
+            }
+        });
+    };
 
-    private void observeViewModel(){
+    private void observViewModel() {
         viewModel.getError().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String errorMessage) {
                 if (errorMessage != null) {
-                    Toast.makeText(Verification.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        viewModel.getUser().observe(this, new Observer<FirebaseUser>(){
+        viewModel.getUser().observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
-                if (firebaseUser != null){
-                    Intent intent = MainActivity.newIntent(Verification.this);
-                    startActivity(intent);
+                if (firebaseUser != null) {
+                    Toast.makeText(LoginActivity.this, "Authorized", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void initViews(){
+    private void initView() {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
-        textViewRegister = findViewById(R.id.textViewRegister);
-        editTextEmail = findViewById(R.id.editTextEmail);
+        textViewRegistration = findViewById(R.id.textViewRegestration);
+        textViewForgotPassword = findViewById(R.id.textViewForgotPassword);
     }
+
 }
->>>>>>> Stashed changes

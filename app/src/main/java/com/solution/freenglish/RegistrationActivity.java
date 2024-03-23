@@ -5,7 +5,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.Button;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 Integer age = Integer.parseInt(getTrimmedValue(editTextAge));
                 String password = getTrimmedValue(editTextPassword);
                 String confirmPassword = getTrimmedValue(editTextConfirmPassword);
-
+                // Go to login activity screen
             }
         });
     }
@@ -44,7 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
         return editText.getText().toString().trim();
     }
 
-    private static Intent newIntent(Context context) {
+    public static Intent newIntent(Context context) {
         return new Intent(context, RegistrationActivity.class);
     }
 }
