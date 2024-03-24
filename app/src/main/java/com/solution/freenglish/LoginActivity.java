@@ -1,5 +1,6 @@
 package com.solution.freenglish;
 
+import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -22,8 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
-    private TextView textViewRegistration;
-    private TextView textViewForgotPassword;
+    private Button textViewRegistration;
+    private Button textViewForgotPassword;
 
     private LoginViewModel viewModel;
 
@@ -76,18 +77,24 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null) {
-                    Toast.makeText(LoginActivity.this, "Authorized", Toast.LENGTH_SHORT).show();
+                    Intent intent = MainActivity.newIntent(LoginActivity.this);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
+    }
+
+    public static Intent newIntent(Context context){
+        return new Intent(context, LoginActivity.class);
     }
 
     private void initView() {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
-        textViewRegistration = findViewById(R.id.textViewRegestration);
-        textViewForgotPassword = findViewById(R.id.textViewForgotPassword);
+        textViewRegistration = findViewById(R.id.buttonRegister);
+        textViewForgotPassword = findViewById(R.id.buttonForgot);
     }
 
 }

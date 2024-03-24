@@ -13,24 +13,14 @@
         android:theme="@style/Theme.FreeEnglish"
         tools:targetApi="31">
         <activity
-<<<<<<< Updated upstream
             android:name=".ResetPasswordActivity"
             android:exported="false" />
-=======
-                android:name=".MainActivity"
-                android:exported="false"/>
 
->>>>>>> Stashed changes
         <activity
             android:name=".RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".Registrayion"
-            android:exported="false"
-            android:theme="@style/Theme.FreeEnglish" />
-        <activity
-<<<<<<< Updated upstream
-            android:name=".Verification"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".ModuleActivity"
@@ -39,12 +29,9 @@
             android:name=".ChooseSectionInModuleActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
-=======
-                android:name=".Verification"
-                android:exported="true">
->>>>>>> Stashed changes
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

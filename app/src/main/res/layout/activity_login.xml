@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Verification">
+        tools:context=".LoginActivity">
 
     <TextView
             android:text="@string/main_logo"
@@ -45,23 +45,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintTop_toBottomOf="@+id/editTextPassword" android:layout_marginTop="24dp"/>
-    <EditText
+    <Button
+            android:backgroundTint="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="48dp" android:layout_marginBottom="184dp" android:autofillHints=""
-            android:id="@+id/editText"/>
-    <EditText
+            android:layout_marginStart="232dp" android:layout_marginBottom="196dp" android:autofillHints=""
+            android:id="@+id/buttonForgot"/>
+    <Button
+            android:backgroundTint="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/register"
             android:textSize="15sp"
-            android:id="@+id/textViewRegister"
-            app:layout_constraintStart_toEndOf="@+id/editText"
-            android:layout_marginStart="132dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="184dp"/>
+            android:id="@+id/buttonRegister"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="196dp" tools:layout_editor_absoluteX="50dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
