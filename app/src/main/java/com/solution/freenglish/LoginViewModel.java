@@ -18,6 +18,12 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel() {
         auth = FirebaseAuth.getInstance();
+        auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                user.setValue(firebaseAuth.getCurrentUser());
+            }
+        });
     }
 
     public LiveData<String> getError() {
