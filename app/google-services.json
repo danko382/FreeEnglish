@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "737274891452",
+    "project_id": "freeenglish-d5c01",
+    "storage_bucket": "freeenglish-d5c01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737274891452:android:22e512f1646084feb954b9",
+        "android_client_info": {
+          "package_name": "com.solution.freenglish"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCnwv89DOHxkvH35ph6oCsNOc36jpuJhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

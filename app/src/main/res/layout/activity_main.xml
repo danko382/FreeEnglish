@@ -10,59 +10,67 @@
     tools:context=".MainActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="392dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewModule1"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_margin="30dp"
-                android:gravity="center"
-                android:text="Module 1"
-                android:textSize="32sp" />
+                    android:id="@+id/textViewModule1"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="30dp"
+                    android:gravity="center"
+                    android:text="Module 1"
+                    android:textSize="32sp"/>
 
             <TextView
-                android:id="@+id/textViewModule2"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_margin="30dp"
-                android:gravity="center"
-                android:text="Module 2"
-                android:textSize="32sp" />
+                    android:id="@+id/textViewModule2"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="30dp"
+                    android:gravity="center"
+                    android:text="Module 2"
+                    android:textSize="32sp"/>
 
             <TextView
-                android:id="@+id/textViewModule3"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_margin="30dp"
-                android:gravity="center"
-                android:text="Module 3"
-                android:textSize="32sp" />
+                    android:id="@+id/textViewModule3"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="30dp"
+                    android:gravity="center"
+                    android:text="Module 3"
+                    android:textSize="32sp"/>
 
             <TextView
-                android:id="@+id/textViewModule4"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_margin="30dp"
-                android:gravity="center"
-                android:text="Module 4"
-                android:textSize="32sp" />
+                    android:id="@+id/textViewModule4"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="30dp"
+                    android:gravity="center"
+                    android:text="Module 4"
+                    android:textSize="32sp"/>
 
             <TextView
-                android:id="@+id/textViewModule5"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_margin="30dp"
-                android:gravity="center"
-                android:text="Module 5"
-                android:textSize="32sp" />
+                    android:id="@+id/textViewModule5"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="30dp"
+                    android:gravity="center"
+                    android:text="Module 5"
+                    android:textSize="32sp"/>
 
         </LinearLayout>
     </ScrollView>
+    <Button android:layout_width="137dp" android:layout_height="wrap_content"
+            android:text="@string/exit"
+            android:textSize="20sp"
+            android:backgroundTint="@color/black"
+            android:layout_marginTop="250dp"
+            android:layout_marginStart="250sp"
+            android:id="@+id/logoutButton"
+    />
 </LinearLayout>
