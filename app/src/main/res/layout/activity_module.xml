@@ -127,8 +127,10 @@
         android:layout_height="60dp"
         android:background="#C0C8D3"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewNextWord"
+        app:layout_constraintEnd_toStartOf="@+id/textViewNextWord"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewNextWord"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <TextView
@@ -178,11 +180,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWord"/>
 
-    <Button
-        android:id="@+id/buttonNextWord"
+    <TextView
+        android:id="@+id/textViewNextWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
+        android:textSize="28sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

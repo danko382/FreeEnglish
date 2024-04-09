@@ -15,9 +15,9 @@ import java.util.Random;
 
 public class ModuleActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextView imageViewTranslateWord, textViewWord;
+    TextView imageViewTranslateWord, textViewWord, textViewNextWord;
     ImageView imageViewBackFromModule;
-    Button buttonChooseTranslateWord1, buttonChooseTranslateWord2, buttonNextWord;
+    Button buttonChooseTranslateWord1, buttonChooseTranslateWord2;
     int size, count, numOfTrueButton, numOfFalseTranslate;
     String[] words, translateWords;
     Random random;
@@ -66,18 +66,18 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         imageViewTranslateWord = findViewById(R.id.textViewTranslateWord);
         buttonChooseTranslateWord1 = findViewById(R.id.buttonChooseTranslateWord1);
         buttonChooseTranslateWord2 = findViewById(R.id.buttonChooseTranslateWord2);
-        buttonNextWord = findViewById(R.id.buttonNextWord);
+        textViewNextWord = findViewById(R.id.textViewNextWord);
         imageViewBackFromModule = findViewById(R.id.imageViewBackFromModule);
 
         textViewWord.setVisibility(View.GONE);
         imageViewTranslateWord.setVisibility(View.GONE);
         buttonChooseTranslateWord1.setVisibility(View.GONE);
         buttonChooseTranslateWord2.setVisibility(View.GONE);
-        buttonNextWord.setVisibility(View.GONE);
+        textViewNextWord.setVisibility(View.GONE);
 
         buttonChooseTranslateWord1.setOnClickListener(this);
         buttonChooseTranslateWord2.setOnClickListener(this);
-        buttonNextWord.setOnClickListener(this);
+        textViewNextWord.setOnClickListener(this);
         imageViewBackFromModule.setOnClickListener(this);
 
 
@@ -151,7 +151,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         imageViewTranslateWord.setVisibility(View.VISIBLE);
         buttonChooseTranslateWord1.setVisibility(View.VISIBLE);
         buttonChooseTranslateWord2.setVisibility(View.VISIBLE);
-        buttonNextWord.setVisibility(View.VISIBLE);
+        textViewNextWord.setVisibility(View.VISIBLE);
 
         words = getResources().getStringArray(R.array.wordsModule1);
         translateWords = getResources().getStringArray(R.array.translateWordsModule1);
@@ -161,10 +161,15 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         buttonChooseTranslateWord1.setText(translateWords[0]);
         buttonChooseTranslateWord2.setText(translateWords[1]);
 
-        buttonNextWord.setEnabled(false);
+        textViewNextWord.setEnabled(false);
 
-        buttonChooseTranslateWord1.setBackgroundColor(Color.BLUE);
-        buttonChooseTranslateWord2.setBackgroundColor(Color.BLUE);
+        buttonChooseTranslateWord1.setBackgroundColor(getResources().getColor(R.color.gentlyLilac));
+        buttonChooseTranslateWord2.setBackgroundColor(getResources().getColor(R.color.gentlyLilac));
+
+        buttonChooseTranslateWord1.setTextColor(getResources().getColor(R.color.textForGentlyLilac));
+        buttonChooseTranslateWord2.setTextColor(getResources().getColor(R.color.textForGentlyLilac));
+
+        textViewNextWord.setTextColor(getResources().getColor(R.color.gray));
     }
 
     private void initRule() {
@@ -172,7 +177,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         imageViewTranslateWord.setVisibility(View.GONE);
         buttonChooseTranslateWord1.setVisibility(View.GONE);
         buttonChooseTranslateWord2.setVisibility(View.GONE);
-        buttonNextWord.setVisibility(View.GONE);
+        textViewNextWord.setVisibility(View.GONE);
 
         ruleLayout.setVisibility(View.VISIBLE);
         answerLayout1.setVisibility(View.VISIBLE);
@@ -214,7 +219,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
             chooseWord1();
         } else if (v == buttonChooseTranslateWord2) {
             chooseWord2();
-        } else if (v == buttonNextWord) {
+        } else if (v == textViewNextWord) {
             nextWord();
         } else if (v == imageViewBackFromModule) {
             startActivity(mainActivity);
@@ -292,8 +297,11 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
 
             Log.d("numOfTrueButton", "" + numOfTrueButton);
 
-            buttonChooseTranslateWord1.setBackgroundColor(Color.BLUE);
-            buttonChooseTranslateWord2.setBackgroundColor(Color.BLUE);
+            buttonChooseTranslateWord1.setBackgroundColor(getResources().getColor(R.color.gentlyLilac));
+            buttonChooseTranslateWord2.setBackgroundColor(getResources().getColor(R.color.gentlyLilac));
+
+            buttonChooseTranslateWord1.setTextColor(getResources().getColor(R.color.textForGentlyLilac));
+            buttonChooseTranslateWord2.setTextColor(getResources().getColor(R.color.textForGentlyLilac));
 
             if (numOfTrueButton == 1) {
                 buttonChooseTranslateWord1.setText(translateWords[count]);
@@ -305,13 +313,13 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
 
             buttonChooseTranslateWord1.setEnabled(true);
             buttonChooseTranslateWord2.setEnabled(true);
-            buttonNextWord.setEnabled(false);
+            textViewNextWord.setEnabled(false);
 
             count++;
         } else {
             buttonChooseTranslateWord1.setEnabled(true);
             buttonChooseTranslateWord2.setEnabled(true);
-            buttonNextWord.setEnabled(false);
+            textViewNextWord.setEnabled(false);
 
             startActivity(chooseSectionInModuleActivity);
         }
@@ -319,30 +327,42 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
 
     private void chooseWord1() {
         if (numOfTrueButton == 1) {
-            buttonChooseTranslateWord1.setBackgroundColor(Color.GREEN);
-            buttonChooseTranslateWord2.setBackgroundColor(Color.RED);
+            buttonChooseTranslateWord1.setBackgroundColor(getResources().getColor(R.color.trueGreen));
+            buttonChooseTranslateWord2.setBackgroundColor(getResources().getColor(R.color.gentlyLilac));
+
+            buttonChooseTranslateWord1.setTextColor(getResources().getColor(R.color.textForTrueGreen));
+            buttonChooseTranslateWord2.setTextColor(getResources().getColor(R.color.textForGentlyLilac));
         } else {
-            buttonChooseTranslateWord1.setBackgroundColor(Color.RED);
-            buttonChooseTranslateWord2.setBackgroundColor(Color.GREEN);
+            buttonChooseTranslateWord1.setBackgroundColor(getResources().getColor(R.color.wrongRed));
+            buttonChooseTranslateWord2.setBackgroundColor(getResources().getColor(R.color.gentlyLilac));
+
+            buttonChooseTranslateWord1.setTextColor(getResources().getColor(R.color.textForWrongRed));
+            buttonChooseTranslateWord2.setTextColor(getResources().getColor(R.color.textForGentlyLilac));
         }
 
         buttonChooseTranslateWord1.setEnabled(false);
         buttonChooseTranslateWord2.setEnabled(false);
-        buttonNextWord.setEnabled(true);
+        textViewNextWord.setEnabled(true);
     }
 
     private void chooseWord2() {
         if (numOfTrueButton == 2) {
-            buttonChooseTranslateWord1.setBackgroundColor(Color.RED);
-            buttonChooseTranslateWord2.setBackgroundColor(Color.GREEN);
+            buttonChooseTranslateWord1.setBackgroundColor(getResources().getColor(R.color.gentlyLilac));
+            buttonChooseTranslateWord2.setBackgroundColor(getResources().getColor(R.color.trueGreen));
+
+            buttonChooseTranslateWord1.setTextColor(getResources().getColor(R.color.textForGentlyLilac));
+            buttonChooseTranslateWord2.setTextColor(getResources().getColor(R.color.textForTrueGreen));
         } else {
-            buttonChooseTranslateWord1.setBackgroundColor(Color.GREEN);
-            buttonChooseTranslateWord2.setBackgroundColor(Color.RED);
+            buttonChooseTranslateWord1.setBackgroundColor(getResources().getColor(R.color.gentlyLilac));
+            buttonChooseTranslateWord2.setBackgroundColor(getResources().getColor(R.color.wrongRed));
+
+            buttonChooseTranslateWord1.setTextColor(getResources().getColor(R.color.textForGentlyLilac));
+            buttonChooseTranslateWord2.setTextColor(getResources().getColor(R.color.textForWrongRed));
         }
 
         buttonChooseTranslateWord1.setEnabled(false);
         buttonChooseTranslateWord2.setEnabled(false);
-        buttonNextWord.setEnabled(true);
+        textViewNextWord.setEnabled(true);
     }
 
     private void nextRuleTask() {
