@@ -20,6 +20,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText editTextConfirmPassword;
     private Button buttonSignUp;
     private RegistartionViewModel viewModel;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

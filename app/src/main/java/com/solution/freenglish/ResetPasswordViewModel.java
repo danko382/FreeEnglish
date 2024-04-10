@@ -21,17 +21,25 @@ public class ResetPasswordViewModel extends ViewModel {
     public MutableLiveData<Boolean> isSuccess(){
         return success;
     }
+    public Boolean emailExistChecker(String email) {
+        return auth.getUserByEmail(email) == null;
+    }
     public void resetPassword(String email){
-        auth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                success.setValue(true);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                error.setValue(e.getMessage());
-            }
-        });
+        if (emailExistChecker(email)) {
+            auth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    success.setValue(true);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    error.setValue(e.getMessage());
+                }
+            });
+        }
+        else {
+            // Throw error message
+        }
     }
 }

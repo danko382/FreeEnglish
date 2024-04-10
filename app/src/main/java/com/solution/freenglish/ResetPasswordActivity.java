@@ -52,6 +52,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
             public void onChanged(Boolean success) {
                 if(success){
                     Toast.makeText(ResetPasswordActivity.this, "The reset link has been successfully sent", Toast.LENGTH_SHORT).show();
+                    Intent intent = MainActivity.newIntent(ResetPasswordActivity.this);
+                    startActivity(intent);
                 }
             }
         });
