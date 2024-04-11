@@ -20,7 +20,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText editTextConfirmPassword;
     private Button buttonSignUp;
     private RegistartionViewModel viewModel;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +30,43 @@ public class RegistrationActivity extends AppCompatActivity {
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int age = 0;
                 String email = getTrimmedValue(editTextEmail);
-                Integer age = Integer.parseInt(getTrimmedValue(editTextAge));
+                String trimmedValue = getTrimmedValue(editTextAge);
                 String password = getTrimmedValue(editTextPassword);
                 String confirmPassword = getTrimmedValue(editTextConfirmPassword);
-                viewModel.signUp(email,age, password, confirmPassword);
+                if (email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty() && age == 0)
+                {
+                    Intent intent = LoginActivity.newIntent(RegistrationActivity.this);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    if (password.equals(confirmPassword) && (age >= 18 && age <= 90) && !password.isEmpty()) {
+                        viewModel.signUp(email, age, password, confirmPassword);
+                    }
+                    else
+                    {
+                        if (trimmedValue != null && !trimmedValue.equals("Age")) {
+                            try {
+                                age = Integer.parseInt(trimmedValue);
+                            } catch (NumberFormatException e) {
+                                editTextAge.setError("Uncorrected format");
+                            }
+                        }
+                        Toast.makeText(RegistrationActivity.this, "Uncorrected", Toast.LENGTH_SHORT).show();
+                        if (!(age >= 18 && age <= 90)){
+                            editTextAge.setError("Your age should be from 18 to 90");
+                        }
+                        if (!password.equals(confirmPassword)){
+                            editTextConfirmPassword.setError("Error: does not match the password");
+                        }
+                        if (password.isEmpty()){
+                            editTextPassword.setError("Error: Error: this field is empty");
+                            editTextConfirmPassword.setError("Error: Error: this field is empty");
+                        }
+                    }
+                }
             }
         });
     }
