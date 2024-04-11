@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class RegistartionViewModel extends ViewModel {
 
     private FirebaseAuth auth;
@@ -44,13 +46,12 @@ public class RegistartionViewModel extends ViewModel {
         String password,
         String confirmPassword
     ){
-
-            auth.createUserWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @NotNull Exception e) {
-                    error.setValue(e.getMessage());
-                }
-            });
+                auth.createUserWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        error.setValue(e.getMessage());
+                    }
+                });
         }
     }
 
