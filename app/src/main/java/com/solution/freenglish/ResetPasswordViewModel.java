@@ -21,11 +21,9 @@ public class ResetPasswordViewModel extends ViewModel {
     public MutableLiveData<Boolean> isSuccess(){
         return success;
     }
-    public Boolean emailExistChecker(String email) {
-        return auth.getUserByEmail(email) == null;
-    }
+
     public void resetPassword(String email){
-        if (emailExistChecker(email)) {
+
             auth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
@@ -37,9 +35,6 @@ public class ResetPasswordViewModel extends ViewModel {
                     error.setValue(e.getMessage());
                 }
             });
-        }
-        else {
-            // Throw error message
-        }
+
     }
 }
