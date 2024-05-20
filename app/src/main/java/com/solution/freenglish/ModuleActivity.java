@@ -42,8 +42,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     Button buttonYellow, buttonBlue, buttonGreen;
     ArrayList<Button> buttonsQuestion, buttonsAnswer;
     TextView textRule, textViewNextRule;
-    int hashAnswer, numOfRuleTask;
-    int numOfRule;
+    int numOfRule, numberOfRules, clickOnNextRule;
     String[] yellowWords, blueWords, greenWords, whiteWords;
     //////////////////////////////////////////////////////////////////////////////////
     // инициализация activity
@@ -120,9 +119,16 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initRule() {
+        clickOnNextRule = 1;
+
         numOfRule = 1;
 
         setVisabilityForRules();
+
+        textViewNextRule.setText("Check");
+
+        answerLayout.setMinHeight(100);
+        questionLayout.setMinHeight(100);
 
         getResourcesForRules();
 
@@ -152,7 +158,14 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
             );
             startActivity(intent);
         } else if (v == textViewNextRule) {
-            nextRuleTask();
+            if (clickOnNextRule % 2 == 0) {
+                textViewNextRule.setText("Check");
+                nextRuleTask();
+            } else {
+                textViewNextRule.setText("Next");
+                checkRuleTask();
+            }
+            clickOnNextRule += 1;
         }
     }
 
@@ -241,6 +254,53 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         textViewNextWord.setEnabled(true);
     }
 
+    private void nextRuleTask() {
+        answerLayout.removeAllViews();
+        questionLayout.removeAllViews();
+
+        answerLayout.setBackgroundColor(getResources().getColor(R.color.light_gray));
+
+        numOfRule += 1;
+
+        if (numOfRule <= numberOfRules) {
+            startInitButtonsForRules();
+
+            shuffle(buttonsQuestion);
+            constraintRuleWords(buttonsQuestion, questionLayout);
+        } else {
+            Intent intent = ChooseSectionInModuleActivity.newIntent(
+                    this,
+                    numOfModule
+            );
+            startActivity(intent);
+        }
+    }
+
+    private void checkRuleTask() {
+        boolean isTrue;
+        if (buttonsQuestion.size() == 0) {
+            isTrue =
+                buttonsAnswer.get(0).getText().equals(yellowWords[numOfRule - 1])
+                && buttonsAnswer.get(1).getText().equals(blueWords[numOfRule - 1])
+                && buttonsAnswer.get(2).getText().equals(greenWords[numOfRule - 1]);
+
+            for (int i = 0; i < whiteWords.length; ++i) {
+                if (!buttonsAnswer.get(i + 3).getText().equals(whiteWords[i])) {
+                    isTrue = false;
+                    break;
+                }
+            }
+        } else {
+            isTrue = false;
+        }
+
+        if (isTrue) {
+            answerLayout.setBackgroundColor(getResources().getColor(R.color.textForTrueGreen));
+        } else {
+            answerLayout.setBackgroundColor(getResources().getColor(R.color.wrong_orange));
+        }
+    }
+
     private void initYellowWords(final int numOfModule) {
         switch(numOfModule) {
             case 1:
@@ -263,13 +323,13 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         if (numOfModule == 1) {
             switch(numOfRule) {
                 case 1:
-                    whiteWords = getResources().getStringArray(R.array.whire_rule_module1_1);
+                    whiteWords = getResources().getStringArray(R.array.white_rule_module1_1);
                     break;
                 case 2:
-                    whiteWords = getResources().getStringArray(R.array.whire_rule_module1_2);
+                    whiteWords = getResources().getStringArray(R.array.white_rule_module1_2);
                     break;
                 case 3:
-                    whiteWords = getResources().getStringArray(R.array.whire_rule_module1_1);
+                    whiteWords = getResources().getStringArray(R.array.white_rule_module1_3);
                     break;
             }
         }
@@ -299,15 +359,6 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
 
             constraintSet.applyTo(constraintLayout);
         }
-    }
-
-    private void nextRuleTask() {
-        numOfRule += 1;
-
-        startInitButtonsForRules();
-
-        shuffle(buttonsQuestion);
-        constraintRuleWords(buttonsQuestion, questionLayout);
     }
 
     private void goneAllViews() {
@@ -397,6 +448,8 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         initBlueWords(numOfModule);
         initGreenWords(numOfModule);
         initWhiteWords(numOfModule, numOfRule);
+
+        numberOfRules = yellowWords.length;
     }
 
     private void startInitButtonsForRules() {
@@ -407,9 +460,9 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         buttonBlue = new Button(this);
         buttonGreen = new Button(this);
 
-        buttonYellow.setText(yellowWords[numOfRule]);
-        buttonBlue.setText(blueWords[numOfRule]);
-        buttonGreen.setText(greenWords[numOfRule]);
+        buttonYellow.setText(yellowWords[numOfRule - 1]);
+        buttonBlue.setText(blueWords[numOfRule - 1]);
+        buttonGreen.setText(greenWords[numOfRule - 1]);
 
         buttonsQuestion.add(buttonYellow);
         buttonsQuestion.add(buttonBlue);
