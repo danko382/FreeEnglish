@@ -1,5 +1,7 @@
 package com.solution.freenglish;
 
+import static java.util.Collections.shuffle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -8,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -36,7 +37,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     //////////////////////////////////////////////////////////////////////////////////
     ConstraintLayout answerLayout, questionLayout;
     Button buttonYellow, buttonBlue, buttonGreen;
-    ArrayList<Button> buttons;
+    ArrayList<Button> buttonsQuestion, buttonsAnswer;
     TextView textRule, textViewNextRule;
     int hashAnswer, numOfRuleTask;
     int numOfRule;
@@ -168,6 +169,50 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         hashAnswer = 0;
         numOfRuleTask = 0;
         numOfRule = 1;
+
+        buttonsQuestion = new ArrayList<>();
+
+        buttonYellow = new Button(this);
+        buttonBlue = new Button(this);
+        buttonGreen = new Button(this);
+
+        buttonYellow.setText(yellowWords[numOfRule]);
+        buttonBlue.setText(blueWords[numOfRule]);
+        buttonGreen.setText(greenWords[numOfRule]);
+
+        buttonsQuestion.add(buttonYellow);
+        buttonsQuestion.add(buttonBlue);
+        buttonsQuestion.add(buttonGreen);
+
+        initWhiteWords(1, numOfRule);
+
+        for (int i = 0; i < whiteWords.length; ++i) {
+            Button whiteButton = new Button(this);
+            whiteButton.setText(whiteWords[i]);
+
+            buttonsQuestion.add(whiteButton);
+        }
+
+        for (int i = 0; i < buttonsQuestion.size(); ++i) {
+            buttonsQuestion.get(i).setTextSize(20);
+            buttonsQuestion.get(i).setId(View.generateViewId());
+            buttonsQuestion.get(i).setVisibility(View.VISIBLE);
+            buttonsQuestion.get(i).setLayoutParams(new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT ));
+            buttonsQuestion.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buttonsQuestion.remove(((Button)v));
+                    buttonsAnswer.add(((Button)v));
+
+                    constraintRuleWords(buttonsAnswer, answerLayout);
+                    constraintRuleWords(buttonsQuestion, questionLayout);
+                }
+            });
+        }
+
+        shuffle(buttonsQuestion);
+        constraintRuleWords(buttonsQuestion, questionLayout);
     }
 
     private void initYellowWords(final int numOfModule) {
@@ -305,10 +350,33 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void constraintRuleWords(ArrayList<Button> buttons, ConstraintLayout constraintLayout) {
-        
+        for (int i = 0; i < buttons.size(); ++i) {
+            constraintLayout.addView(buttons.get(i));
+
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(constraintLayout);
+
+            constraintSet.connect(buttons.get(i).getId(), ConstraintSet.START, constraintLayout.getId(),ConstraintSet.START,0);
+            constraintSet.connect(buttons.get(i).getId(), ConstraintSet.END, constraintLayout.getId(), ConstraintSet.END, 0);
+            if (i < 3) {
+                constraintSet.connect(buttons.get(i).getId(), ConstraintSet.TOP , constraintLayout.getId(), ConstraintSet.TOP,0);
+            } else {
+                constraintSet.connect(buttons.get(i).getId(), ConstraintSet.TOP , buttons.get(i - 3).getId(), ConstraintSet.BOTTOM,0);
+            }
+            if (i % 3 == 0) {
+                constraintSet.setHorizontalBias(buttons.get(i).getId(), 0.0f);
+            } else if (i % 3 == 1) {
+                constraintSet.setHorizontalBias(buttons.get(i).getId(), 0.5f);
+            } else {
+                constraintSet.setHorizontalBias(buttons.get(i).getId(), 1.0f);
+            }
+
+            constraintSet.applyTo(constraintLayout);
+        }
     }
+
     private void nextRuleTask() {
-        buttons = new ArrayList<>();
+        buttonsQuestion = new ArrayList<>();
 
         numOfRule += 1;
 
@@ -320,9 +388,9 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         buttonBlue.setText(blueWords[numOfRule]);
         buttonGreen.setText(greenWords[numOfRule]);
 
-        buttons.add(buttonYellow);
-        buttons.add(buttonBlue);
-        buttons.add(buttonGreen);
+        buttonsQuestion.add(buttonYellow);
+        buttonsQuestion.add(buttonBlue);
+        buttonsQuestion.add(buttonGreen);
 
         initWhiteWords(1, numOfRule);
 
@@ -330,33 +398,28 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
             Button whiteButton = new Button(this);
             whiteButton.setText(whiteWords[i]);
 
-            buttons.add(whiteButton);
+            buttonsQuestion.add(whiteButton);
         }
 
-        for (int i = 0; i < buttons.size(); ++i) {
-            buttons.get(i).setTextSize(20);
-            buttons.get(i).setId(View.generateViewId());
-            buttons.get(i).setVisibility(View.VISIBLE);
-            buttons.get(i).setLayoutParams(new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT,
+        for (int i = 0; i < buttonsQuestion.size(); ++i) {
+            buttonsQuestion.get(i).setTextSize(20);
+            buttonsQuestion.get(i).setId(View.generateViewId());
+            buttonsQuestion.get(i).setVisibility(View.VISIBLE);
+            buttonsQuestion.get(i).setLayoutParams(new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT,
                     ConstraintLayout.LayoutParams.WRAP_CONTENT ));
+            buttonsQuestion.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buttonsQuestion.remove(((Button)v));
+                    buttonsAnswer.add(((Button)v));
+
+                    constraintRuleWords(buttonsAnswer, answerLayout);
+                    constraintRuleWords(buttonsQuestion, questionLayout);
+                }
+            });
         }
 
-        for (int i = 0; i < buttons.size(); ++i) {
-            questionLayout.addView(buttons.get(i));
-
-            ConstraintSet constraintSet = new ConstraintSet();
-            constraintSet.clone(questionLayout);
-
-            constraintSet.connect(buttons.get(i).getId(), ConstraintSet.START, questionLayout.getId(),ConstraintSet.START,0);
-            constraintSet.connect(buttons.get(i).getId(), ConstraintSet.END, questionLayout.getId(), ConstraintSet.END, 0);
-            if(buttons.size() - i == )
-            if (i < 3) {
-                constraintSet.connect(buttons.get(i).getId(), ConstraintSet.TOP , buttonYellow.getId(), ConstraintSet.TOP,0);
-            } else {
-                constraintSet.connect(buttons.get(i).getId(), ConstraintSet.TOP , buttons.get(i - 3).getId(), ConstraintSet.TOP,0);
-            }
-
-            constraintSet.applyTo(questionLayout);
-        }
+        shuffle(buttonsQuestion);
+        constraintRuleWords(buttonsQuestion, questionLayout);
     }
 }
