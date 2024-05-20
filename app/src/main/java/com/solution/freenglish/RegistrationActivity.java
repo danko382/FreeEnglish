@@ -35,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String trimmedValue = getTrimmedValue(editTextAge);
                 String password = getTrimmedValue(editTextPassword);
                 String confirmPassword = getTrimmedValue(editTextConfirmPassword);
+                age = Integer.parseInt(trimmedValue);
                 if (email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty() && age == 0)
                 {
                     Intent intent = LoginActivity.newIntent(RegistrationActivity.this);
