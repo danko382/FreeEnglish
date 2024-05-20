@@ -19,12 +19,13 @@ import com.google.firebase.auth.FirebaseUser;
 import java.io.FileReader;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
+    public static final String EXTRA_NUM_OF_MODULE = "numOfModule";
     private MainActivityViewModel viewModel;
     TextView textViewModule1, textViewModule2, textViewModule3, textViewModule4, textViewModule5;
-    Intent ChooseSelectionModuleActivity;
+    Intent intent;
+    int numOfModule;
 
-    private Button logoutButton;
+    private TextView logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         observViewModel();
         setLogoutButton();
+    }
+
+    public static Intent newIntent(
+            Context context
+    ) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 
     private void observViewModel(){
@@ -59,14 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    static Intent newIntent(Context context){
-        return new Intent(context, MainActivity.class);
-    }
-
-
     private void init() {
-        ChooseSelectionModuleActivity = new Intent(MainActivity.this, ChooseSectionInModuleActivity.class);
-
         textViewModule1 = findViewById(R.id.textViewModule1);
         textViewModule2 = findViewById(R.id.textViewModule2);
         textViewModule3 = findViewById(R.id.textViewModule3);
@@ -83,20 +84,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == textViewModule1) {
-            ChooseSelectionModuleActivity.putExtra("numOfModule", "1");
-            startActivity(ChooseSelectionModuleActivity);
+            numOfModule = 1;
         } else if (v == textViewModule2) {
-            ChooseSelectionModuleActivity.putExtra("numOfModule", "2");
-            startActivity(ChooseSelectionModuleActivity);
+            numOfModule = 2;
         } else if (v == textViewModule3) {
-            ChooseSelectionModuleActivity.putExtra("numOfModule", "3");
-            startActivity(ChooseSelectionModuleActivity);
+            numOfModule = 3;
         } else if (v == textViewModule4) {
-            ChooseSelectionModuleActivity.putExtra("numOfModule", "4");
-            startActivity(ChooseSelectionModuleActivity);
+            numOfModule = 4;
         } else if (v == textViewModule5) {
-            ChooseSelectionModuleActivity.putExtra("numOfModule", "5");
-            startActivity(ChooseSelectionModuleActivity);
+            numOfModule = 5;
         }
+
+        intent = ChooseSectionInModuleActivity.newIntent(
+                this,
+                numOfModule
+        );
+        startActivity(intent);
     }
 }

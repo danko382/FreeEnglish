@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="392dp">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.9">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -24,7 +26,7 @@
                     android:layout_height="250dp"
                     android:layout_margin="30dp"
                     android:gravity="center"
-                    android:text="Module 1"
+                    android:text="@string/module_1"
                     android:textSize="32sp"/>
 
             <TextView
@@ -33,7 +35,7 @@
                     android:layout_height="250dp"
                     android:layout_margin="30dp"
                     android:gravity="center"
-                    android:text="Module 2"
+                    android:text="@string/module_2"
                     android:textSize="32sp"/>
 
             <TextView
@@ -42,7 +44,7 @@
                     android:layout_height="250dp"
                     android:layout_margin="30dp"
                     android:gravity="center"
-                    android:text="Module 3"
+                    android:text="@string/module_3"
                     android:textSize="32sp"/>
 
             <TextView
@@ -51,7 +53,7 @@
                     android:layout_height="250dp"
                     android:layout_margin="30dp"
                     android:gravity="center"
-                    android:text="Module 4"
+                    android:text="@string/module_4"
                     android:textSize="32sp"/>
 
             <TextView
@@ -60,17 +62,20 @@
                     android:layout_height="250dp"
                     android:layout_margin="30dp"
                     android:gravity="center"
-                    android:text="Module 5"
+                    android:text="@string/module_5"
                     android:textSize="32sp"/>
 
         </LinearLayout>
     </ScrollView>
-    <Button android:layout_width="137dp" android:layout_height="wrap_content"
-            android:text="exit"
-            android:textSize="20sp"
-            android:backgroundTint="@color/black"
-            android:layout_marginTop="250dp"
-            android:layout_marginStart="250sp"
-            android:id="@+id/logoutButton"
-    />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="exit"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

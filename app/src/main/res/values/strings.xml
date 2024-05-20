@@ -1,4 +1,10 @@
 <resources>
+    <string name="module_1">Present\nSimple</string>
+    <string name="module_2">Present\nSimple</string>
+    <string name="module_3">Present\nSimple</string>
+    <string name="module_4">Present\nSimple</string>
+    <string name="module_5">Present\nSimple</string>
+
     <string name="app_name">FreeEnglish</string>
     <string name="textViewWord"></string>
     <string name="button_choose_translate_word1"></string>
