@@ -1,37 +1,49 @@
 package com.solution.freenglish;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ModuleActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextView imageViewTranslateWord, textViewWord, textViewNextWord;
-    ImageView imageViewBackFromModule;
+    //////////////////////////////////////////////////////////////////////////////////
+    // общие переменные
+    //////////////////////////////////////////////////////////////////////////////////
+    Random random;
+    TextView textViewBackToChooseModule;
+    Intent chooseSectionInModuleActivity, mainActivity, superIntent;
+    String numOfModule, typeOfModule;
+    //////////////////////////////////////////////////////////////////////////////////
+    // перменные для модуля слов
+    //////////////////////////////////////////////////////////////////////////////////
+    TextView textViewTranslateWord, textViewWord, textViewNextWord;
     Button buttonChooseTranslateWord1, buttonChooseTranslateWord2;
     int size, count, numOfTrueButton, numOfFalseTranslate;
     String[] words, translateWords;
-    Random random;
-    Intent chooseSectionInModuleActivity, mainActivity, superIntent;
-    String numOfModule, typeOfModule;
-
-    View ruleLayout, answerLayout1, answerLayout2, questionLayout1, questionLayout2;
-    TextView textRule;
-    Button buttonAnswerGreen, buttonAnswerPurple, buttonAnswerBlue, buttonAnswerWhite;
-    Button buttonQuestionGreen, buttonQuestionPurple, buttonQuestionBlue, buttonQuestionWhite;
-    Button buttonNextAndCheck;
+    //////////////////////////////////////////////////////////////////////////////////
+    // перменные для модуля правил
+    //////////////////////////////////////////////////////////////////////////////////
+    ConstraintLayout answerLayout, questionLayout;
+    Button buttonYellow, buttonBlue, buttonGreen;
+    ArrayList<Button> buttons;
+    TextView textRule, textViewNextRule;
     int hashAnswer, numOfRuleTask;
-    String[] greenWords, purpleWords, blueWords, whiteWords;
-
+    int numOfRule;
+    String[] yellowWords, blueWords, greenWords, whiteWords;
+    //////////////////////////////////////////////////////////////////////////////////
+    // инициализация activity
+    //////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,21 +68,28 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
+    // блок изначальной инициализации, все view, кроме общих, имеют видимость gone
+    //////////////////////////////////////////////////////////////////////////////////
     private void init() {
+        //////////////////////////////////////////////////////////////////////////////////
+        // инициализация общих переменных
+        //////////////////////////////////////////////////////////////////////////////////
         random = new Random();
-
         numOfModule = superIntent.getStringExtra("numOfModule");
         typeOfModule = superIntent.getStringExtra("typeOfModule");
-
+        textViewBackToChooseModule = findViewById(R.id.textViewBackToChooseModule);
+        //////////////////////////////////////////////////////////////////////////////////
+        // инициализация переменных модуля слов
+        //////////////////////////////////////////////////////////////////////////////////
         textViewWord = findViewById(R.id.textViewWord);
-        imageViewTranslateWord = findViewById(R.id.textViewTranslateWord);
+        textViewTranslateWord = findViewById(R.id.textViewTranslateWord);
         buttonChooseTranslateWord1 = findViewById(R.id.buttonChooseTranslateWord1);
         buttonChooseTranslateWord2 = findViewById(R.id.buttonChooseTranslateWord2);
         textViewNextWord = findViewById(R.id.textViewNextWord);
-        imageViewBackFromModule = findViewById(R.id.imageViewBackFromModule);
 
         textViewWord.setVisibility(View.GONE);
-        imageViewTranslateWord.setVisibility(View.GONE);
+        textViewTranslateWord.setVisibility(View.GONE);
         buttonChooseTranslateWord1.setVisibility(View.GONE);
         buttonChooseTranslateWord2.setVisibility(View.GONE);
         textViewNextWord.setVisibility(View.GONE);
@@ -78,83 +97,40 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         buttonChooseTranslateWord1.setOnClickListener(this);
         buttonChooseTranslateWord2.setOnClickListener(this);
         textViewNextWord.setOnClickListener(this);
-        imageViewBackFromModule.setOnClickListener(this);
-
-
-        ruleLayout = findViewById(R.id.ruleLayout);
-        answerLayout1 = findViewById(R.id.answerLayout1);
-        answerLayout2 = findViewById(R.id.answerLayout2);
-        questionLayout1 = findViewById(R.id.questionLayout1);
-        questionLayout2 = findViewById(R.id.questionLayout2);
+        textViewBackToChooseModule.setOnClickListener(this);
+        //////////////////////////////////////////////////////////////////////////////////
+        // инициализация переменных модуля слов
+        //////////////////////////////////////////////////////////////////////////////////
+        answerLayout = findViewById(R.id.answerLayout);
+        questionLayout = findViewById(R.id.questionLayout);
         textRule = findViewById(R.id.textRule);
-        buttonAnswerGreen = findViewById(R.id.buttonAnswerGreen);
-        buttonAnswerPurple = findViewById(R.id.buttonAnswerPurple);
-        buttonAnswerBlue = findViewById(R.id.buttonAnswerBlue);
-        buttonAnswerWhite = findViewById(R.id.buttonAnswerWhite);
-        buttonQuestionGreen = findViewById(R.id.buttonQuestionGreen);
-        buttonQuestionPurple = findViewById(R.id.buttonQuestionPurple);
-        buttonQuestionBlue = findViewById(R.id.buttonQuestionBlue);
-        buttonQuestionWhite = findViewById(R.id.buttonQuestionWhite);
-        buttonNextAndCheck = findViewById(R.id.buttonNextAndCheck);
+        textViewNextRule = findViewById(R.id.textViewNextRule);
 
-        ruleLayout.setVisibility(View.GONE);
-        answerLayout1.setVisibility(View.GONE);
-        answerLayout2.setVisibility(View.GONE);
-        questionLayout1.setVisibility(View.GONE);
-        questionLayout2.setVisibility(View.GONE);
+        answerLayout.setVisibility(View.GONE);
+        questionLayout.setVisibility(View.GONE);
         textRule.setVisibility(View.GONE);
-        buttonAnswerGreen.setVisibility(View.GONE);
-        buttonAnswerPurple.setVisibility(View.GONE);
-        buttonAnswerBlue.setVisibility(View.GONE);
-        buttonAnswerWhite.setVisibility(View.GONE);
-        buttonQuestionGreen.setVisibility(View.GONE);
-        buttonQuestionPurple.setVisibility(View.GONE);
-        buttonQuestionBlue.setVisibility(View.GONE);
-        buttonQuestionWhite.setVisibility(View.GONE);
-        buttonNextAndCheck.setVisibility(View.GONE);
+        textViewNextRule.setVisibility(View.GONE);
 
-        buttonAnswerGreen.setOnClickListener(this);
-        buttonAnswerPurple.setOnClickListener(this);
-        buttonAnswerBlue.setOnClickListener(this);
-        buttonAnswerWhite.setOnClickListener(this);
-        buttonQuestionGreen.setOnClickListener(this);
-        buttonQuestionPurple.setOnClickListener(this);
-        buttonQuestionBlue.setOnClickListener(this);
-        buttonQuestionWhite.setOnClickListener(this);
-        buttonNextAndCheck.setOnClickListener(this);
-
-        buttonAnswerGreen.setBackgroundColor(Color.GREEN);
-        buttonAnswerPurple.setBackgroundColor(Color.YELLOW);
-        buttonAnswerBlue.setBackgroundColor(Color.BLUE);
-        buttonAnswerWhite.setBackgroundColor(Color.GRAY);
-        buttonQuestionGreen.setBackgroundColor(Color.GREEN);
-        buttonQuestionPurple.setBackgroundColor(Color.YELLOW);
-        buttonQuestionBlue.setBackgroundColor(Color.BLUE);
-        buttonQuestionWhite.setBackgroundColor(Color.GRAY);
-        buttonNextAndCheck.setBackgroundColor(Color.BLUE);
+        textViewNextRule.setOnClickListener(this);
     }
-
+    //////////////////////////////////////////////////////////////////////////////////
+    // блок инициализации модуля слов, все view, кроме принадлежащих модулю слов,
+    // имеют видимость gone
+    //////////////////////////////////////////////////////////////////////////////////
     private void initWords() {
-        ruleLayout.setVisibility(View.GONE);
-        answerLayout1.setVisibility(View.GONE);
-        answerLayout2.setVisibility(View.GONE);
-        questionLayout1.setVisibility(View.GONE);
-        questionLayout2.setVisibility(View.GONE);
+        answerLayout.setVisibility(View.GONE);
+        questionLayout.setVisibility(View.GONE);
         textRule.setVisibility(View.GONE);
-        buttonQuestionGreen.setVisibility(View.GONE);
-        buttonQuestionPurple.setVisibility(View.GONE);
-        buttonQuestionBlue.setVisibility(View.GONE);
-        buttonQuestionWhite.setVisibility(View.GONE);
-        buttonNextAndCheck.setVisibility(View.GONE);
+        textViewNextRule.setVisibility(View.GONE);
 
         textViewWord.setVisibility(View.VISIBLE);
-        imageViewTranslateWord.setVisibility(View.VISIBLE);
+        textViewTranslateWord.setVisibility(View.VISIBLE);
         buttonChooseTranslateWord1.setVisibility(View.VISIBLE);
         buttonChooseTranslateWord2.setVisibility(View.VISIBLE);
         textViewNextWord.setVisibility(View.VISIBLE);
 
-        words = getResources().getStringArray(R.array.wordsModule1);
-        translateWords = getResources().getStringArray(R.array.translateWordsModule1);
+        words = getResources().getStringArray(R.array.words_module1);
+        translateWords = getResources().getStringArray(R.array.translate_words_module1);
         size = words.length; count = 1; numOfTrueButton = 1; numOfFalseTranslate = 1;
 
         textViewWord.setText(words[0]);
@@ -174,39 +150,58 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initRule() {
         textViewWord.setVisibility(View.GONE);
-        imageViewTranslateWord.setVisibility(View.GONE);
+        textViewTranslateWord.setVisibility(View.GONE);
         buttonChooseTranslateWord1.setVisibility(View.GONE);
         buttonChooseTranslateWord2.setVisibility(View.GONE);
         textViewNextWord.setVisibility(View.GONE);
 
-        ruleLayout.setVisibility(View.VISIBLE);
-        answerLayout1.setVisibility(View.VISIBLE);
-        answerLayout2.setVisibility(View.VISIBLE);
-        questionLayout1.setVisibility(View.VISIBLE);
-        questionLayout2.setVisibility(View.VISIBLE);
         textRule.setVisibility(View.VISIBLE);
-        buttonQuestionGreen.setVisibility(View.VISIBLE);
-        buttonQuestionPurple.setVisibility(View.VISIBLE);
-        buttonQuestionBlue.setVisibility(View.VISIBLE);
-        buttonQuestionWhite.setVisibility(View.VISIBLE);
-        buttonNextAndCheck.setVisibility(View.VISIBLE);
+        answerLayout.setVisibility(View.VISIBLE);
+        questionLayout.setVisibility(View.VISIBLE);
+        textViewNextRule.setVisibility(View.VISIBLE);
 
-        greenWords = getResources().getStringArray(R.array.greenWords);
-        purpleWords = getResources().getStringArray(R.array.purpleWords);
-        blueWords = getResources().getStringArray(R.array.blueWords);
-        whiteWords = getResources().getStringArray(R.array.whiteWords);
-
-        buttonAnswerGreen.setText(greenWords[0]);
-        buttonAnswerPurple.setText(purpleWords[0]);
-        buttonAnswerBlue.setText(blueWords[0]);
-        buttonAnswerWhite.setText(whiteWords[0]);
-        buttonQuestionGreen.setText(greenWords[0]);
-        buttonQuestionPurple.setText(purpleWords[0]);
-        buttonQuestionBlue.setText(blueWords[0]);
-        buttonQuestionWhite.setText(whiteWords[0]);
+        initYellowWords(1);
+        initBlueWords(1);
+        initGreenWords(1);
+        initWhiteWords(1, 1);
 
         hashAnswer = 0;
         numOfRuleTask = 0;
+        numOfRule = 1;
+    }
+
+    private void initYellowWords(final int numOfModule) {
+        switch(numOfModule) {
+            case 1:
+                yellowWords = getResources().getStringArray(R.array.yellow_rule_module1);
+        }
+    }
+    private void initBlueWords(final int numOfModule) {
+        switch(numOfModule) {
+            case 1:
+                blueWords = getResources().getStringArray(R.array.blue_rule_module1);
+        }
+    }
+    private void initGreenWords(final int numOfModule) {
+        switch(numOfModule) {
+            case 1:
+                greenWords = getResources().getStringArray(R.array.green_rule_module1);
+        }
+    }
+    private void initWhiteWords(final int numOfModule, final int numOfRule) {
+        if (numOfModule == 1) {
+            switch(numOfRule) {
+                case 1:
+                    whiteWords = getResources().getStringArray(R.array.whire_rule_module1_1);
+                    break;
+                case 2:
+                    whiteWords = getResources().getStringArray(R.array.whire_rule_module1_2);
+                    break;
+                case 3:
+                    whiteWords = getResources().getStringArray(R.array.whire_rule_module1_1);
+                    break;
+            }
+        }
     }
 
     private void initPractice() {
@@ -221,65 +216,9 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
             chooseWord2();
         } else if (v == textViewNextWord) {
             nextWord();
-        } else if (v == imageViewBackFromModule) {
+        } else if (v == textViewBackToChooseModule) {
             startActivity(mainActivity);
-        } else if (v == buttonAnswerGreen) {
-            buttonAnswerGreen.setVisibility(View.GONE);
-            buttonQuestionGreen.setVisibility(View.VISIBLE);
-
-            if (hashAnswer == 0) {
-                hashAnswer -= 1;
-            }
-        } else if (v == buttonAnswerPurple) {
-            buttonAnswerPurple.setVisibility(View.GONE);
-            buttonQuestionPurple.setVisibility(View.VISIBLE);
-
-            if (hashAnswer == 1) {
-                hashAnswer -= 1;
-            }
-        } else if (v == buttonAnswerBlue) {
-            buttonAnswerBlue.setVisibility(View.GONE);
-            buttonQuestionBlue.setVisibility(View.VISIBLE);
-
-            if (hashAnswer == 2) {
-                hashAnswer -= 1;
-            }
-        } else if (v == buttonAnswerWhite) {
-            buttonAnswerWhite.setVisibility(View.GONE);
-            buttonQuestionWhite.setVisibility(View.VISIBLE);
-
-            if (hashAnswer == 3) {
-                hashAnswer -= 1;
-            }
-        } else if (v == buttonQuestionGreen) {
-            buttonAnswerGreen.setVisibility(View.VISIBLE);
-            buttonQuestionGreen.setVisibility(View.GONE);
-
-            if (hashAnswer == 0) {
-                hashAnswer += 1;
-            }
-        } else if (v == buttonQuestionPurple) {
-            buttonAnswerPurple.setVisibility(View.VISIBLE);
-            buttonQuestionPurple.setVisibility(View.GONE);
-
-            if (hashAnswer == 1) {
-                hashAnswer += 1;
-            }
-        } else if (v == buttonQuestionBlue) {
-            buttonAnswerBlue.setVisibility(View.VISIBLE);
-            buttonQuestionBlue.setVisibility(View.GONE);
-
-            if (hashAnswer == 2) {
-                hashAnswer += 1;
-            }
-        } else if (v == buttonQuestionWhite) {
-            buttonAnswerWhite.setVisibility(View.VISIBLE);
-            buttonQuestionWhite.setVisibility(View.GONE);
-
-            if (hashAnswer == 3) {
-                hashAnswer += 1;
-            }
-        } else if (v == buttonNextAndCheck) {
+        } else if (v == textViewNextRule) {
             nextRuleTask();
         }
     }
@@ -365,33 +304,59 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         textViewNextWord.setEnabled(true);
     }
 
+    private void constraintRuleWords(ArrayList<Button> buttons, ConstraintLayout constraintLayout) {
+        
+    }
     private void nextRuleTask() {
-        if (hashAnswer == 4) {
-            if (numOfRuleTask == 2) {
-                startActivity(chooseSectionInModuleActivity);
+        buttons = new ArrayList<>();
+
+        numOfRule += 1;
+
+        buttonYellow = new Button(this);
+        buttonBlue = new Button(this);
+        buttonGreen = new Button(this);
+
+        buttonYellow.setText(yellowWords[numOfRule]);
+        buttonBlue.setText(blueWords[numOfRule]);
+        buttonGreen.setText(greenWords[numOfRule]);
+
+        buttons.add(buttonYellow);
+        buttons.add(buttonBlue);
+        buttons.add(buttonGreen);
+
+        initWhiteWords(1, numOfRule);
+
+        for (int i = 0; i < whiteWords.length; ++i) {
+            Button whiteButton = new Button(this);
+            whiteButton.setText(whiteWords[i]);
+
+            buttons.add(whiteButton);
+        }
+
+        for (int i = 0; i < buttons.size(); ++i) {
+            buttons.get(i).setTextSize(20);
+            buttons.get(i).setId(View.generateViewId());
+            buttons.get(i).setVisibility(View.VISIBLE);
+            buttons.get(i).setLayoutParams(new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT ));
+        }
+
+        for (int i = 0; i < buttons.size(); ++i) {
+            questionLayout.addView(buttons.get(i));
+
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(questionLayout);
+
+            constraintSet.connect(buttons.get(i).getId(), ConstraintSet.START, questionLayout.getId(),ConstraintSet.START,0);
+            constraintSet.connect(buttons.get(i).getId(), ConstraintSet.END, questionLayout.getId(), ConstraintSet.END, 0);
+            if(buttons.size() - i == )
+            if (i < 3) {
+                constraintSet.connect(buttons.get(i).getId(), ConstraintSet.TOP , buttonYellow.getId(), ConstraintSet.TOP,0);
+            } else {
+                constraintSet.connect(buttons.get(i).getId(), ConstraintSet.TOP , buttons.get(i - 3).getId(), ConstraintSet.TOP,0);
             }
-            
-            numOfRuleTask += 1;
 
-            buttonAnswerGreen.setText(greenWords[numOfRuleTask]);
-            buttonAnswerPurple.setText(purpleWords[numOfRuleTask]);
-            buttonAnswerBlue.setText(blueWords[numOfRuleTask]);
-            buttonAnswerWhite.setText(whiteWords[numOfRuleTask]);
-            buttonQuestionGreen.setText(greenWords[numOfRuleTask]);
-            buttonQuestionPurple.setText(purpleWords[numOfRuleTask]);
-            buttonQuestionBlue.setText(blueWords[numOfRuleTask]);
-            buttonQuestionWhite.setText(whiteWords[numOfRuleTask]);
-
-            buttonAnswerGreen.setVisibility(View.GONE);
-            buttonAnswerPurple.setVisibility(View.GONE);
-            buttonAnswerBlue.setVisibility(View.GONE);
-            buttonAnswerWhite.setVisibility(View.GONE);
-            buttonQuestionGreen.setVisibility(View.VISIBLE);
-            buttonQuestionPurple.setVisibility(View.VISIBLE);
-            buttonQuestionBlue.setVisibility(View.VISIBLE);
-            buttonQuestionWhite.setVisibility(View.VISIBLE);
-
-            hashAnswer = 0;
+            constraintSet.applyTo(questionLayout);
         }
     }
 }
