@@ -6,190 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".ModuleActivity">
 
-    <LinearLayout
-        android:id="@+id/ruleLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone"
+    <TextView
+        android:id="@+id/textViewBackToChooseModule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingStart="10dp"
+        android:textSize="28sp"
+        android:text="@string/button_back_from_module"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textRule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rule"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintVertical_bias="0.1"/>
 
-        <TextView
-            android:id="@+id/textRule"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="I/You/We/They  V1  do + not + V1 \n\nHe/She/It  Vs/Ves  does + not + Vs/Ves"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:id="@+id/answerLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonAnswerGreen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/buttonAnswerPurple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/buttonAnswerBlue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/answerLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="50dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonAnswerWhite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/questionLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonQuestionGreen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/buttonQuestionPurple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/buttonQuestionBlue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/questionLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="50dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonQuestionWhite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/buttonNextAndCheck"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Next" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageViewBackFromModule"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="#C0C8D3"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewNextWord"
-        app:layout_constraintEnd_toStartOf="@+id/textViewNextWord"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/answerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewNextWord"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+        app:layout_constraintVertical_bias="0.4">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/questionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/answerLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textViewNextRule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="@string/button_next"
+        android:textSize="28sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTranslateWord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/textViewTranslateWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWord"
+        app:layout_constraintBottom_toTopOf="@+id/buttonChooseTranslateWord1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/buttonChooseTranslateWord1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/buttonChooseTranslateWord2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTranslateWord" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
         android:id="@+id/buttonChooseTranslateWord2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/buttonChooseTranslateWord1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonChooseTranslateWord1" />
-
-    <TextView
-        android:id="@+id/textViewTranslateWord"
-        android:layout_width="wrap_content"
-        android:visibility="visible"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/buttonChooseTranslateWord1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWord"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewNextWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
+        android:paddingBottom="10dp"
+        android:text="@string/button_next"
         android:textSize="28sp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonChooseTranslateWord2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
