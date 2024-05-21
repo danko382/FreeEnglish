@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Rule"
         android:textSize="20sp"
+        android:gravity="center"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

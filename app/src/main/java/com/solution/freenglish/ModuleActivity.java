@@ -43,7 +43,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     Button buttonYellow, buttonBlue, buttonGreen;
     TextView textRule, textViewNextRule;
     int numOfRule, numberOfRules, clickOnNextRule;
-    String[] yellowWords, blueWords, greenWords, whiteWords;
+    String[] yellowWords, blueWords, greenWords, whiteWords, rules;
     //////////////////////////////////////////////////////////////////////////////////
     // перменные для модуля практики
     //////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +138,8 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         questionLayout.setMinHeight(100);
 
         getResourcesForRules();
+
+        textRule.setText(rules[numOfRule - 1]);
 
         startInitButtonsForRules();
 
@@ -310,6 +312,8 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
 
         numOfRule += 1;
 
+        textRule.setText(rules[numOfRule - 1]);
+
         if (numOfRule <= numberOfRules) {
             startInitButtonsForRules();
 
@@ -380,6 +384,12 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
                     whiteWords = getResources().getStringArray(R.array.white_rule_module1_3);
                     break;
             }
+        }
+    }
+    private void initRules(final int numOfModule) {
+        switch(numOfModule) {
+            case 1:
+                rules = getResources().getStringArray(R.array.rules_module_1);
         }
     }
 
@@ -584,6 +594,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         initBlueWords(numOfModule);
         initGreenWords(numOfModule);
         initWhiteWords(numOfModule, numOfRule);
+        initRules(numOfModule);
 
         numberOfRules = yellowWords.length;
     }
@@ -595,6 +606,13 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         buttonYellow = new Button(this);
         buttonBlue = new Button(this);
         buttonGreen = new Button(this);
+
+        buttonYellow.setBackgroundColor(getResources().getColor(R.color.yellow_button));
+        buttonYellow.setTextColor(getResources().getColor(R.color.yellow_button_text));
+        buttonBlue.setBackgroundColor(getResources().getColor(R.color.blue_button));
+        buttonBlue.setTextColor(getResources().getColor(R.color.blue_button_text));
+        buttonGreen.setBackgroundColor(getResources().getColor(R.color.green_button));
+        buttonGreen.setTextColor(getResources().getColor(R.color.green_button_text));
 
         buttonYellow.setText(yellowWords[numOfRule - 1]);
         buttonBlue.setText(blueWords[numOfRule - 1]);

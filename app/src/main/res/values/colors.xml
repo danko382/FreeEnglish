@@ -15,9 +15,9 @@
     <color name="silver">#C0C0C0</color>
 
     <color name="yellow_button">#FFFF00</color>
-    <color name="yellow_button_text">#FFD700</color>
+    <color name="yellow_button_text">#FF8C00</color>
     <color name="blue_button">#4169E1</color>
-    <color name="blue_button_text">#0000FF</color>
+    <color name="blue_button_text">#000080</color>
     <color name="green_button">#CCFF99</color>
     <color name="green_button_text">#99CC00</color>
 </resources>

@@ -56,6 +56,12 @@
         <item>The feeling that you get when something happens that you did note xpect.</item>
     </array>
 
+    <array name="rules_module_1">
+        <item>I/We/You/He/She/It + V1/V1es + ...</item>
+        <item>I/We/You/He/She/It + V1/V1es + ...</item>
+        <item>I/We/You/He/She/It + V1/V1es + ...</item>
+    </array>
+
     <array name="yellow_rule_module1">
         <item>I</item>
         <item>He</item>
