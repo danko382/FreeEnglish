@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Rule"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:visibility="gone"
         android:background="@color/light_gray"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:paddingTop="10dp"
+        android:visibility="gone"
         android:background="@color/light_gray"
         app:layout_constraintTop_toBottomOf="@+id/answerLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +67,7 @@
         android:paddingBottom="10dp"
         android:text="@string/button_next"
         android:textSize="28sp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -123,6 +126,30 @@
         android:text="@string/button_next"
         android:textSize="28sp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSentence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sentence"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"/>
+
+    <TextView
+        android:id="@+id/textViewNextPractice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="28sp"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

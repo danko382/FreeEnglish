@@ -86,4 +86,34 @@
         <item>pool</item>
     </array>
 
+
+    <array name="types_tasks_module1">
+        <item>right_order</item>
+        <item>right_order</item>
+    </array>
+
+    <array name="sentence_parts_s1_module1">
+        <item>communication</item>
+        <item>is</item>
+        <item>the key</item>
+        <item>to building</item>
+        <item>strong</item>
+        <item>relationships.</item>
+    </array>
+
+    <array name="sentence_parts_s2_module1">
+        <item>We</item>
+        <item>are</item>
+        <item>practing</item>
+        <item>politeness</item>
+        <item>in their</item>
+        <item>interactions</item>
+        <item>this weekend.</item>
+    </array>
+
+    <array name="sentence_for_task_right_order_module1">
+        <item>Общение - это ключ к построению прочных отношений.</item>
+        <item>Мы практикуем вежливость в общении в эти выходные</item>
+    </array>
+
 </resources>

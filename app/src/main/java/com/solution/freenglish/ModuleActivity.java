@@ -28,6 +28,8 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     Intent superIntent;
     int numOfModule;
     String typeOfSection;
+    ConstraintLayout answerLayout, questionLayout;
+    ArrayList<Button> buttonsQuestion, buttonsAnswer;
     //////////////////////////////////////////////////////////////////////////////////
     // перменные для модуля слов
     //////////////////////////////////////////////////////////////////////////////////
@@ -38,12 +40,16 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     //////////////////////////////////////////////////////////////////////////////////
     // перменные для модуля правил
     //////////////////////////////////////////////////////////////////////////////////
-    ConstraintLayout answerLayout, questionLayout;
     Button buttonYellow, buttonBlue, buttonGreen;
-    ArrayList<Button> buttonsQuestion, buttonsAnswer;
     TextView textRule, textViewNextRule;
     int numOfRule, numberOfRules, clickOnNextRule;
     String[] yellowWords, blueWords, greenWords, whiteWords;
+    //////////////////////////////////////////////////////////////////////////////////
+    // перменные для модуля практики
+    //////////////////////////////////////////////////////////////////////////////////
+    TextView textViewNextPractice, textViewSentence;
+    String[] sentenceParts, typesTasks, sentenceForTaskRightOrder;
+    int numOfTaskRightOrder, numOfTaskPractice, clickOnNextTaskRightOrder;
     //////////////////////////////////////////////////////////////////////////////////
     // инициализация activity
     //////////////////////////////////////////////////////////////////////////////////
@@ -136,12 +142,33 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         startInitButtonsForRules();
 
         shuffle(buttonsQuestion);
-        constraintRuleWords(buttonsQuestion, questionLayout);
+        constraintButtonsPartsSentence(buttonsQuestion, questionLayout);
     }
 
 
     private void initPractice() {
+        numOfTaskRightOrder = 1;
+        numOfTaskPractice = 1;
+        clickOnNextTaskRightOrder = 1;
 
+        getResourcesForPractice();
+
+        switch(typesTasks[0]) {
+            case "right_order":
+                answerLayout.setMinHeight(100);
+                questionLayout.setMinHeight(100);
+
+                textViewNextPractice.setText("Check");
+
+                setVisabilityForTaskRightOrder();
+                startInitButtonsForTaskRightOrder();
+
+                shuffle(buttonsQuestion);
+                constraintButtonsPartsSentence(buttonsQuestion, questionLayout);
+
+                textViewSentence.setText(sentenceForTaskRightOrder[numOfTaskRightOrder - 1]);
+                break;
+        }
     }
 
     @Override
@@ -167,6 +194,25 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
                 checkRuleTask();
             }
             clickOnNextRule += 1;
+        } else if (v == textViewNextPractice) {
+            if (numOfTaskPractice <= typesTasks.length) {
+                String typePractice = typesTasks[numOfTaskPractice];
+
+                switch(typePractice) {
+                    case "right_order":
+                        if (clickOnNextTaskRightOrder % 2 == 0) {
+                            nextTaskRightOrder();
+                            textViewNextPractice.setText("Check");
+                        } else {
+                            checkRightOrderTask();
+                            textViewNextPractice.setText("Next");
+                        }
+                        clickOnNextTaskRightOrder += 1;
+                        break;
+                }
+            } else {
+
+            }
         }
     }
 
@@ -268,7 +314,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
             startInitButtonsForRules();
 
             shuffle(buttonsQuestion);
-            constraintRuleWords(buttonsQuestion, questionLayout);
+            constraintButtonsPartsSentence(buttonsQuestion, questionLayout);
         } else {
             Intent intent = ChooseSectionInModuleActivity.newIntent(
                     this,
@@ -337,7 +383,76 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void constraintRuleWords(ArrayList<Button> buttons, ConstraintLayout constraintLayout) {
+    private void nextTaskRightOrder() {
+        answerLayout.removeAllViews();
+        questionLayout.removeAllViews();
+
+        answerLayout.setBackgroundColor(getResources().getColor(R.color.light_gray));
+
+        numOfTaskRightOrder += 1;
+
+        if (numOfTaskRightOrder <= 2) {
+            textViewSentence.setText(sentenceForTaskRightOrder[numOfTaskRightOrder - 1]);
+
+            startInitButtonsForTaskRightOrder();
+
+            shuffle(buttonsQuestion);
+            constraintButtonsPartsSentence(buttonsQuestion, questionLayout);
+        } else {
+            Intent intent = ChooseSectionInModuleActivity.newIntent(
+                    this,
+                    numOfModule
+            );
+            startActivity(intent);
+        }
+    }
+
+    private void checkRightOrderTask() {
+        boolean isTrue = true;
+        if (buttonsQuestion.size() == 0) {
+            for (int i = 0; i < sentenceParts.length; ++i) {
+                if (!buttonsAnswer.get(i).getText().equals(sentenceParts[i])) {
+                    isTrue = false;
+                    break;
+                }
+            }
+        } else {
+            isTrue = false;
+        }
+
+        if (isTrue) {
+            answerLayout.setBackgroundColor(getResources().getColor(R.color.textForTrueGreen));
+        } else {
+            answerLayout.setBackgroundColor(getResources().getColor(R.color.wrong_orange));
+        }
+    }
+
+    private void initTypesTasks(final int numOfModule) {
+        switch(numOfModule) {
+            case 1:
+                typesTasks = getResources().getStringArray(R.array.types_tasks_module1);
+        }
+    }
+    private void initWordsForTaskRightOrder(final int numOfModule, final int numOfSentence) {
+        if (numOfModule == 1) {
+            switch(numOfSentence) {
+                case 1:
+                    sentenceParts = getResources().getStringArray(R.array.sentence_parts_s1_module1);
+                    break;
+                case 2:
+                    sentenceParts = getResources().getStringArray(R.array.sentence_parts_s2_module1);
+                    break;
+            }
+        }
+    }
+    private void initSentenceForTaskRightOrder(final int numOfModule) {
+        switch(numOfModule) {
+            case 1:
+                sentenceForTaskRightOrder = getResources().getStringArray(R.array.sentence_for_task_right_order_module1);
+        }
+    }
+
+    private void constraintButtonsPartsSentence(ArrayList<Button> buttons, ConstraintLayout constraintLayout) {
         for (int i = 0; i < buttons.size(); ++i) {
             constraintLayout.addView(buttons.get(i));
 
@@ -379,6 +494,11 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         questionLayout.setVisibility(View.GONE);
         textRule.setVisibility(View.GONE);
         textViewNextRule.setVisibility(View.GONE);
+        //////////////////////////////////////////////////////////////////////////////////
+        // practice
+        //////////////////////////////////////////////////////////////////////////////////
+        textViewSentence.setVisibility(View.GONE);
+        textViewNextPractice.setVisibility(View.GONE);
     }
 
     private void initAllViews() {
@@ -408,6 +528,13 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         textViewNextRule = findViewById(R.id.textViewNextRule);
 
         textViewNextRule.setOnClickListener(this);
+        //////////////////////////////////////////////////////////////////////////////////
+        // practice
+        //////////////////////////////////////////////////////////////////////////////////
+        textViewSentence = findViewById(R.id.textViewSentence);
+        textViewNextPractice = findViewById(R.id.textViewNextPractice);
+
+        textViewNextPractice.setOnClickListener(this);
     }
 
     private void setVisabilityForWords() {
@@ -415,6 +542,9 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         questionLayout.setVisibility(View.GONE);
         textRule.setVisibility(View.GONE);
         textViewNextRule.setVisibility(View.GONE);
+
+        textViewSentence.setVisibility(View.GONE);
+        textViewNextPractice.setVisibility(View.GONE);
 
         textViewWord.setVisibility(View.VISIBLE);
         textViewMeanWord.setVisibility(View.VISIBLE);
@@ -439,6 +569,9 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         buttonChooseTranslateWord1.setVisibility(View.GONE);
         buttonChooseTranslateWord2.setVisibility(View.GONE);
         textViewNextWord.setVisibility(View.GONE);
+
+        textViewSentence.setVisibility(View.GONE);
+        textViewNextPractice.setVisibility(View.GONE);
 
         textRule.setVisibility(View.VISIBLE);
         answerLayout.setVisibility(View.VISIBLE);
@@ -503,8 +636,72 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
                     answerLayout.removeAllViews();
                     questionLayout.removeAllViews();
 
-                    constraintRuleWords(buttonsAnswer, answerLayout);
-                    constraintRuleWords(buttonsQuestion, questionLayout);
+                    constraintButtonsPartsSentence(buttonsAnswer, answerLayout);
+                    constraintButtonsPartsSentence(buttonsQuestion, questionLayout);
+                }
+            });
+        }
+    }
+
+    private void setVisabilityForTaskRightOrder() {
+        textViewWord.setVisibility(View.GONE);
+        textViewMeanWord.setVisibility(View.GONE);
+        buttonChooseTranslateWord1.setVisibility(View.GONE);
+        buttonChooseTranslateWord2.setVisibility(View.GONE);
+        textViewNextWord.setVisibility(View.GONE);
+
+        textRule.setVisibility(View.GONE);
+        textViewNextRule.setVisibility(View.GONE);
+
+        answerLayout.setVisibility(View.VISIBLE);
+        questionLayout.setVisibility(View.VISIBLE);
+        textViewSentence.setVisibility(View.VISIBLE);
+        textViewNextPractice.setVisibility(View.VISIBLE);
+    }
+
+    private void getResourcesForPractice() {
+        initTypesTasks(numOfModule);
+        initSentenceForTaskRightOrder(numOfModule);
+    }
+
+    private void startInitButtonsForTaskRightOrder() {
+        buttonsQuestion = new ArrayList<>();
+        buttonsAnswer = new ArrayList<>();
+
+        initWordsForTaskRightOrder(numOfModule, numOfTaskRightOrder);
+
+        for (int i = 0; i < sentenceParts.length; ++i) {
+            Button part = new Button(this);
+            part.setText(sentenceParts[i]);
+
+            buttonsQuestion.add(part);
+        }
+
+        for (int i = 0; i < buttonsQuestion.size(); ++i) {
+            buttonsQuestion.get(i).setTextSize(14);
+            buttonsQuestion.get(i).setId(View.generateViewId());
+            buttonsQuestion.get(i).setVisibility(View.VISIBLE);
+            buttonsQuestion.get(i).setLayoutParams(new ConstraintLayout.LayoutParams( ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT ));
+            buttonsQuestion.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ConstraintLayout parent = (ConstraintLayout) v.getParent();
+                    Button b = (Button)v;
+
+                    if (parent == questionLayout) {
+                        buttonsQuestion.remove(b);
+                        buttonsAnswer.add(b);
+                    } else {
+                        buttonsAnswer.remove(b);
+                        buttonsQuestion.add(b);
+                    }
+
+                    answerLayout.removeAllViews();
+                    questionLayout.removeAllViews();
+
+                    constraintButtonsPartsSentence(buttonsAnswer, answerLayout);
+                    constraintButtonsPartsSentence(buttonsQuestion, questionLayout);
                 }
             });
         }
