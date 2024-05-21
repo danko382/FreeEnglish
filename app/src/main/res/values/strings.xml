@@ -43,6 +43,18 @@
         <item>радость</item>
         <item>удивление</item>
     </array>
+    <array name="words_mean_module1">
+        <item>The act of communicating with other people.</item>
+        <item>The talking in a book, play or film.</item>
+        <item>A realationship between people or things.</item>
+        <item>It is a communication technique that involves fully concentrating, understanding, responding empathetically to the speaker, and demonstrating interest in what they are saying.</item>
+        <item>Knowledge about a subject, situation, etc or about how something works.</item>
+        <item>Admirationfor someone because of their knowledge, skill, or achievements.</item>
+        <item>Good manners and respect for the feelings of others.</item>
+        <item>The quality of being willing to listen to, think about or accept different ideas.</item>
+        <item>A feeling of great happiness.</item>
+        <item>The feeling that you get when something happens that you did note xpect.</item>
+    </array>
 
     <array name="yellow_rule_module1">
         <item>I</item>

@@ -18,7 +18,8 @@
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/silver">
 
             <TextView
                     android:id="@+id/textViewModule1"
@@ -27,7 +28,8 @@
                     android:layout_margin="30dp"
                     android:gravity="center"
                     android:text="@string/module_1"
-                    android:textSize="32sp"/>
+                    android:textSize="32sp"
+                    android:background="@color/light_gray"/>
 
             <TextView
                     android:id="@+id/textViewModule2"
@@ -36,7 +38,8 @@
                     android:layout_margin="30dp"
                     android:gravity="center"
                     android:text="@string/module_2"
-                    android:textSize="32sp"/>
+                    android:textSize="32sp"
+                    android:background="@color/light_gray"/>
 
             <TextView
                     android:id="@+id/textViewModule3"
@@ -45,7 +48,8 @@
                     android:layout_margin="30dp"
                     android:gravity="center"
                     android:text="@string/module_3"
-                    android:textSize="32sp"/>
+                    android:textSize="32sp"
+                    android:background="@color/light_gray"/>
 
             <TextView
                     android:id="@+id/textViewModule4"
@@ -54,7 +58,8 @@
                     android:layout_margin="30dp"
                     android:gravity="center"
                     android:text="@string/module_4"
-                    android:textSize="32sp"/>
+                    android:textSize="32sp"
+                    android:background="@color/light_gray"/>
 
             <TextView
                     android:id="@+id/textViewModule5"
@@ -63,7 +68,8 @@
                     android:layout_margin="30dp"
                     android:gravity="center"
                     android:text="@string/module_5"
-                    android:textSize="32sp"/>
+                    android:textSize="32sp"
+                    android:background="@color/light_gray"/>
 
         </LinearLayout>
     </ScrollView>

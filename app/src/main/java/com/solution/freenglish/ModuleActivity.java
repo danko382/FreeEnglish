@@ -31,10 +31,10 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     //////////////////////////////////////////////////////////////////////////////////
     // перменные для модуля слов
     //////////////////////////////////////////////////////////////////////////////////
-    TextView textViewTranslateWord, textViewWord, textViewNextWord;
+    TextView textViewMeanWord, textViewWord, textViewNextWord;
     Button buttonChooseTranslateWord1, buttonChooseTranslateWord2;
     int size, count, numOfTrueButton, numOfFalseTranslate;
-    String[] words, translateWords;
+    String[] words, translateWords, wordsMean;
     //////////////////////////////////////////////////////////////////////////////////
     // перменные для модуля правил
     //////////////////////////////////////////////////////////////////////////////////
@@ -104,6 +104,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         size = words.length; count = 1; numOfTrueButton = 1; numOfFalseTranslate = 1;
 
         textViewWord.setText(words[0]);
+        textViewMeanWord.setText(wordsMean[0]);
         buttonChooseTranslateWord1.setText(translateWords[0]);
         buttonChooseTranslateWord2.setText(translateWords[1]);
 
@@ -172,6 +173,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     private void nextWord() {
         if (count < size) {
             textViewWord.setText(words[count]);
+            textViewMeanWord.setText(wordsMean[count]);
 
             numOfTrueButton = random.nextInt(2) + 1;
             numOfFalseTranslate = random.nextInt(size);
@@ -366,7 +368,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         // words
         //////////////////////////////////////////////////////////////////////////////////
         textViewWord.setVisibility(View.GONE);
-        textViewTranslateWord.setVisibility(View.GONE);
+        textViewMeanWord.setVisibility(View.GONE);
         buttonChooseTranslateWord1.setVisibility(View.GONE);
         buttonChooseTranslateWord2.setVisibility(View.GONE);
         textViewNextWord.setVisibility(View.GONE);
@@ -388,7 +390,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         // words
         //////////////////////////////////////////////////////////////////////////////////
         textViewWord = findViewById(R.id.textViewWord);
-        textViewTranslateWord = findViewById(R.id.textViewTranslateWord);
+        textViewMeanWord = findViewById(R.id.textViewMeanWord);
         buttonChooseTranslateWord1 = findViewById(R.id.buttonChooseTranslateWord1);
         buttonChooseTranslateWord2 = findViewById(R.id.buttonChooseTranslateWord2);
         textViewNextWord = findViewById(R.id.textViewNextWord);
@@ -415,7 +417,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         textViewNextRule.setVisibility(View.GONE);
 
         textViewWord.setVisibility(View.VISIBLE);
-        textViewTranslateWord.setVisibility(View.VISIBLE);
+        textViewMeanWord.setVisibility(View.VISIBLE);
         buttonChooseTranslateWord1.setVisibility(View.VISIBLE);
         buttonChooseTranslateWord2.setVisibility(View.VISIBLE);
         textViewNextWord.setVisibility(View.VISIBLE);
@@ -426,13 +428,14 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
             case 1:
                 words = getResources().getStringArray(R.array.words_module1);
                 translateWords = getResources().getStringArray(R.array.translate_words_module1);
+                wordsMean = getResources().getStringArray(R.array.words_mean_module1);
                 break;
         }
     }
 
     private void setVisabilityForRules() {
         textViewWord.setVisibility(View.GONE);
-        textViewTranslateWord.setVisibility(View.GONE);
+        textViewMeanWord.setVisibility(View.GONE);
         buttonChooseTranslateWord1.setVisibility(View.GONE);
         buttonChooseTranslateWord2.setVisibility(View.GONE);
         textViewNextWord.setVisibility(View.GONE);
