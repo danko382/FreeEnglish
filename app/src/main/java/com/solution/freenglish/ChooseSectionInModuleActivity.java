@@ -42,7 +42,7 @@ public class ChooseSectionInModuleActivity extends AppCompatActivity implements 
         numOfModule = superActivity.getIntExtra(EXTRA_NUM_OF_MODULE, 1);
 
         textViewWors = findViewById(R.id.textViewWords);
-        textViewRule = findViewById(R.id.textViewRoole);
+        textViewRule = findViewById(R.id.textViewRule);
         textViewPractice = findViewById(R.id.textViewPractice);
         imageViewBackFromChoose = findViewById(R.id.imageViewBackFromChoose);
 

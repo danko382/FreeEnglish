@@ -10,8 +10,11 @@
     <color name="gentlyLilac">#CCCCFF</color>
     <color name="textForGentlyLilac">#9966FF</color>
     <color name="gray">#999999</color>
+
+
     <color name="light_gray">#DCDCDC</color>
     <color name="wrong_orange">#FF4500</color>
+    <color name="right_green">#99CC00</color>
     <color name="silver">#C0C0C0</color>
 
     <color name="yellow_button">#FFFF00</color>

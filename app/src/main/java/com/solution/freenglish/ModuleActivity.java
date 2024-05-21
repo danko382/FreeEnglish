@@ -347,7 +347,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if (isTrue) {
-            answerLayout.setBackgroundColor(getResources().getColor(R.color.textForTrueGreen));
+            answerLayout.setBackgroundColor(getResources().getColor(R.color.right_green));
         } else {
             answerLayout.setBackgroundColor(getResources().getColor(R.color.wrong_orange));
         }
@@ -431,7 +431,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if (isTrue) {
-            answerLayout.setBackgroundColor(getResources().getColor(R.color.textForTrueGreen));
+            answerLayout.setBackgroundColor(getResources().getColor(R.color.right_green));
         } else {
             answerLayout.setBackgroundColor(getResources().getColor(R.color.wrong_orange));
         }

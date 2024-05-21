@@ -13,14 +13,14 @@
         android:text="Words"
         android:textSize="32sp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/textViewRoole"
+        app:layout_constraintBottom_toTopOf="@+id/textViewRule"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewRoole"
+        android:id="@+id/textViewRule"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:text="Rule"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRoole" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRule" />
 
     <ImageView
         android:id="@+id/imageViewBackFromChoose"
