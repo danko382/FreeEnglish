@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainActivityViewModel viewModel;
     TextView textViewModule1, textViewModule2, textViewModule3, textViewModule4, textViewModule5;
     Intent intent;
-    int numOfModule;
+    int numOfModule, firstModule, secondModule, thirdModule;
+    String userName;
 
     private TextView logoutButton;
 

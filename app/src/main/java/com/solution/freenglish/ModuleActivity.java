@@ -48,7 +48,7 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     // перменные для модуля практики
     //////////////////////////////////////////////////////////////////////////////////
     TextView textViewNextPractice, textViewSentence;
-    String[] sentenceParts, typesTasks, sentenceForTaskRightOrder;
+    String[] sentenceParts, typesTasks, sentenceForTaskRightOrder, variantsAnswer, sentensesVariantsAnswer;
     int numOfTaskRightOrder, numOfTaskPractice, clickOnNextTaskRightOrder;
     //////////////////////////////////////////////////////////////////////////////////
     // инициализация activity
@@ -461,6 +461,24 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
                 sentenceForTaskRightOrder = getResources().getStringArray(R.array.sentence_for_task_right_order_module1);
         }
     }
+    private void initSentencesVariants(final int numOfModule) {
+        switch(numOfModule) {
+            case 1:
+                sentensesVariantsAnswer = getResources().getStringArray(R.array.sentence_for_task_right_order_module1);
+        }
+    }
+    private void initVariantsAnswer(final int numOfModule, final int numOfSentence) {
+        if (numOfModule == 1) {
+            switch(numOfSentence) {
+                case 1:
+                    variantsAnswer = getResources().getStringArray(R.array.sentence_parts_s1_module1);
+                    break;
+                case 2:
+                    variantsAnswer = getResources().getStringArray(R.array.sentence_parts_s2_module1);
+                    break;
+            }
+        }
+    }
 
     private void constraintButtonsPartsSentence(ArrayList<Button> buttons, ConstraintLayout constraintLayout) {
         for (int i = 0; i < buttons.size(); ++i) {
@@ -677,9 +695,27 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         textViewNextPractice.setVisibility(View.VISIBLE);
     }
 
+    private void setVisabilityForTaskChoseAnswer() {
+        textViewWord.setVisibility(View.GONE);
+        textViewMeanWord.setVisibility(View.GONE);
+        buttonChooseTranslateWord1.setVisibility(View.GONE);
+        buttonChooseTranslateWord2.setVisibility(View.GONE);
+        textViewNextWord.setVisibility(View.GONE);
+
+        questionLayout.setVisibility(View.GONE);
+        textViewSentence.setVisibility(View.GONE);
+
+        textRule.setVisibility(View.GONE);
+        textViewNextRule.setVisibility(View.GONE);
+
+        textViewNextPractice.setVisibility(View.VISIBLE);
+        answerLayout.setVisibility(View.VISIBLE);
+    }
+
     private void getResourcesForPractice() {
         initTypesTasks(numOfModule);
         initSentenceForTaskRightOrder(numOfModule);
+        //initSentencesVariants(numOfModule);
     }
 
     private void startInitButtonsForTaskRightOrder() {
